@@ -54,16 +54,14 @@ const main = async () => {
   execSync('yarn install --production');
   process.chdir('..');
 
-  if(type === 'plugin') {
-    // if it has custom Dockerfile
-    if(fs.existsSync(`./erxes/packages/${folderName}/Dockerfile`)) {
-      execSync(`cp ./erxes/packages/${folderName}/Dockerfile ./erxes/Dockerfile`);
-    } else // provide default Dockerfile
-    {
-      const dockerfileTemplate = fs.readFileSync('../packages/default.template.Dockerfile').toString();
-      const dockerfile = dockerfileTemplate.replace('${folderName}', folderName);
-      fs.writeFileSync(`./erxes/Dockerfile`, dockerfile);
-    }
+  // if it has custom Dockerfile
+  if(fs.existsSync(`./erxes/packages/${folderName}/Dockerfile`)) {
+    execSync(`cp ./erxes/packages/${folderName}/Dockerfile ./erxes/Dockerfile`);
+  } else // provide default Dockerfile
+  {
+    const dockerfileTemplate = fs.readFileSync('../packages/default.template.Dockerfile').toString();
+    const dockerfile = dockerfileTemplate.replace('${folderName}', folderName);
+    fs.writeFileSync(`./erxes/Dockerfile`, dockerfile);
   }
 
 };
