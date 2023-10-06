@@ -34,7 +34,7 @@ const main = async () => {
   fs.cpSync(`../packages/${folderName}`, `${erxesDir}/packages/${folderName}`, { recursive: true });
   fs.cpSync('../yarn.lock', `${erxesDir}/yarn.lock`);
   fs.writeFileSync(`${erxesDir}/package.json`, JSON.stringify({
-    name: `@erxes/${folderName}`,
+    name: `erxes`,
     private: true,
     workspaces: [
       "packages/*"
@@ -47,13 +47,10 @@ const main = async () => {
   execSync(`yarn install`);
   execSync(`yarn workspaces run build`);
 
-  // replace src dir with build result
-  execSync('rm -rf ./packages/api-utils/src');
-  execSync(`mv ./packages/api-utils/dist ./packages/api-utils/src`);
-  execSync(`rm -rf ./packages/${folderName}/src`);
-  execSync(`mv ./packages/${folderName}/dist ./packages/${folderName}/src`);
+  execSync(`cp -RT ./packages/api-utils/dist ./packages/api-utils/src`);
+  execSync(`cp -RT ./packages/${folderName}/dist ./packages/${folderName}/src`);
 
-  execSync(`rm -rf node_modules ./packages/api-utils/node_modules ./packages/${folderName}/node_modules`);
+  execSync(`rm -rf node_modules ./packages/api-utils/node_modules ./packages/${folderName}/node_modules ./packages/api-utils/dist ./packages/${folderName}/dist`);
 
   execSync('yarn install --production');
 };
