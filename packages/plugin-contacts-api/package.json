@@ -2,10 +2,8 @@
   "name": "@erxes/plugin-contacts-api",
   "version": "1.0.0",
   "scripts": {
-    "install-deps": "yarn install",
     "dev": "nodemon src/index.ts",
-    "build" : "yarn tsc",
-    "replace-src" : "cp -RT dist src && rm -rf dist"
+    "build" : "tsc"
   },
   "dependencies": {
     "@erxes/api-utils" : "*",

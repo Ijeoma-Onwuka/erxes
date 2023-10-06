@@ -43,7 +43,6 @@ const main = async () => {
 
 
   process.chdir(erxesDir);
-
   execSync(`yarn install`);
   execSync(`yarn workspaces run build`);
 
@@ -53,6 +52,20 @@ const main = async () => {
   execSync(`rm -rf node_modules ./packages/api-utils/node_modules ./packages/${folderName}/node_modules ./packages/api-utils/dist ./packages/${folderName}/dist`);
 
   execSync('yarn install --production');
+  process.chdir('..');
+
+  if(type === 'plugin') {
+    // if it has custom Dockerfile
+    if(fs.existsSync(`./erxes/packages/${folderName}/Dockerfile`)) {
+      execSync(`cp ./erxes/packages/${folderName}/Dockerfile ./erxes/Dockerfile`);
+    } else // provide default Dockerfile
+    {
+      const dockerfileTemplate = fs.readFileSync('../packages/default.template.Dockerfile').toString();
+      const dockerfile = dockerfileTemplate.replace('${folderName}', folderName);
+      fs.writeFileSync(`./erxes/Dockerfile`, dockerfile);
+    }
+  }
+
 };
 
 main()
