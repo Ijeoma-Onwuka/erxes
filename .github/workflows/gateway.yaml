@@ -33,9 +33,10 @@ jobs:
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-gateway-${GITHUB_REF#refs/heads/}
+          key: ${{ runner.os }}-yarn-gateway-${{ GITHUB_REF#refs/heads/ }}
           restore-keys: |
             ${{ runner.os }}-yarn-gateway-
+            ${{ runner.os }}-yarn-
 
       - name: Build
         run: |
