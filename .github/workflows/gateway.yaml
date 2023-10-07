@@ -37,8 +37,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-gateway-
 
-      - run: yarn install
-
       - name: Build
         run: |
           cp -r builder dist

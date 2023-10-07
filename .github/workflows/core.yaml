@@ -36,9 +36,7 @@ jobs:
           key: ${{ runner.os }}-yarn-core-${GITHUB_REF#refs/heads/}
           restore-keys: |
             ${{ runner.os }}-yarn-core-
-      
-      - run: yarn install
-
+            
       - name: Build
         run: |
           cp -r builder dist
