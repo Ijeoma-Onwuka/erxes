@@ -21,7 +21,10 @@ import {
   applyProxyToCore
 } from './proxy/create-middleware';
 import { startRouter, stopRouter } from './apollo-router';
-import { startSubscriptionServer, stopSubscriptionServer } from './subscription';
+import {
+  startSubscriptionServer,
+  stopSubscriptionServer
+} from './subscription';
 import { publishRefreshEnabledServices } from '@erxes/api-utils/src/serviceDiscovery';
 
 const {
@@ -148,3 +151,5 @@ const {
     process.exit(0);
   });
 });
+
+// trigger
