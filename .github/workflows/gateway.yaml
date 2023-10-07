@@ -33,10 +33,11 @@ jobs:
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-gateway-${{ hashFiles('yarn.lock', 'gateway/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-gateway-
             ${{ runner.os }}-yarn-
+
+      - run: yarn install
 
       - name: Build
         run: |
