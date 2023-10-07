@@ -6,4 +6,4 @@ RUN apt-get update -y \
     && rm -rf /var/lib/apt/lists/*
 COPY --chown=node:node . /workers
 USER node
-ENTRYPOINT ["node", "--max_old_space_size=8192", "dist/workers/src"]
+ENTRYPOINT ["node", "--max_old_space_size=8192", "packages/workers/src"]

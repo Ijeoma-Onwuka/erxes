@@ -2,12 +2,11 @@
   "name": "@erxes/plugin-integrations-api",
   "version": "1.0.0",
   "scripts": {
-    "install-deps": "cd .erxes && yarn install",
-    "dev": "cd .erxes && yarn dev",
-    "build": "cd .erxes && yarn build",
-    "start": "cd .erxes/dist/plugin-inbox-api/.erxes && node src"
+    "dev": "nodemon src/index.ts",
+    "build" : "tsc"
   },
   "dependencies": {
+    "@erxes/api-utils" : "*",
     "@google-cloud/pubsub": "^1.1.5",
     "@types/body-parser": "^1.17.0",
     "@types/dotenv": "^4.0.3",
