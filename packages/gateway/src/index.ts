@@ -151,5 +151,3 @@ const {
     process.exit(0);
   });
 });
-
-// trigger
