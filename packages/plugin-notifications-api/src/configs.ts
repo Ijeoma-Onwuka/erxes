@@ -21,6 +21,12 @@ export default {
     };
   },
   hasSubscriptions: true,
+  subscriptionPluginPath: require('path').resolve(
+    __dirname,
+    'graphql',
+    'subscriptionPlugin.js'
+  ),
+
   segment: {},
   apolloServerContext: async (context, req) => {
     const subdomain = getSubdomain(req);
