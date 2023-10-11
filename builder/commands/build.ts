@@ -1,9 +1,4 @@
-// import * as fse from 'fs-extra';
-// import { exec } from 'child_process';
-import path from 'path';
-import fs from 'fs';
-import { execSync } from 'child_process';
-
+import build from '../src/build';
 
 const main = async () => {
   if (process.argv.length <= 2) {
@@ -12,11 +7,6 @@ const main = async () => {
     );
   }
 
-  const erxesDir = path.resolve(__dirname, '..', 'erxes');
-
-  fs.rmSync(erxesDir, { recursive: true, force: true });
-  fs.mkdirSync(erxesDir);
-  fs.mkdirSync(`${erxesDir}/packages`);
 
   const type = process.argv[2];
   let folderName = type;
@@ -29,41 +19,7 @@ const main = async () => {
     folderName = `plugin-${process.argv[3]}-api`;
   }
 
-  fs.cpSync('../packages/api-utils', `${erxesDir}/packages/api-utils`, { recursive: true });
-  fs.cpSync('../packages/tsconfig.api.jsonc', `${erxesDir}/packages/tsconfig.api.jsonc`);
-  fs.cpSync(`../packages/${folderName}`, `${erxesDir}/packages/${folderName}`, { recursive: true });
-  fs.cpSync('../yarn.lock', `${erxesDir}/yarn.lock`);
-  fs.writeFileSync(`${erxesDir}/package.json`, JSON.stringify({
-    name: `erxes`,
-    private: true,
-    workspaces: [
-      "packages/*"
-    ],
-  }))
-
-
-  process.chdir(erxesDir);
-  execSync(`yarn install`);
-  execSync(`yarn workspaces run build`);
-
-  execSync(`cp -RT ./packages/api-utils/dist ./packages/api-utils/src`);
-  execSync(`cp -RT ./packages/${folderName}/dist ./packages/${folderName}/src`);
-
-  execSync(`rm -rf node_modules ./packages/api-utils/node_modules ./packages/${folderName}/node_modules ./packages/api-utils/dist ./packages/${folderName}/dist`);
-
-  execSync('yarn install --production');
-  process.chdir('..');
-
-  // if it has custom Dockerfile
-  if(fs.existsSync(`./erxes/packages/${folderName}/Dockerfile`)) {
-    execSync(`cp ./erxes/packages/${folderName}/Dockerfile ./erxes/Dockerfile`);
-  } else // provide default Dockerfile
-  {
-    const dockerfileTemplate = fs.readFileSync('../packages/default.template.Dockerfile').toString();
-    const dockerfile = dockerfileTemplate.replace('${folderName}', folderName);
-    fs.writeFileSync(`./erxes/Dockerfile`, dockerfile);
-  }
-
+  await build(folderName);  
 };
 
 main()

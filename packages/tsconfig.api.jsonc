@@ -12,6 +12,7 @@
     "skipLibCheck": true,
     "strict": true,
     "useUnknownInCatchVariables": false,
-    "preserveSymlinks": true
+    "preserveSymlinks": true,
+    "allowSyntheticDefaultImports": true
   }
 }
