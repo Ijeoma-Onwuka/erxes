@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node dist",
     "dev": "ERXES_TELEMETRY_DISABLED=1 DEBUG=erxes-workers* NODE_ENV=development nodemon src/index.ts",
     "build": "tsc"
   },
