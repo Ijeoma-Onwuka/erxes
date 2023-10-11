@@ -6,7 +6,7 @@
   ],
   "scripts": {
     "build": "yarn ts-node commands/build.ts",
-    "try-build-everything": "yarn ts-node commands/try-building-everything.ts"
+    "try-building-everything": "yarn ts-node commands/try-building-everything.ts"
   },
   "devDependencies": {
     "ts-node": "10.9.1",
