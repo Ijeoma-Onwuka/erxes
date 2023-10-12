@@ -20,7 +20,7 @@ export default async function build(folderName: string) {
       workspaces: [
         "packages/*"
       ],
-    }))
+    }));
   
   
     process.chdir(artifactDir);
@@ -49,5 +49,6 @@ export default async function build(folderName: string) {
       const dockerfile = dockerfileTemplate.replace('${folderName}', folderName);
       fs.writeFileSync(`${artifactDir}/Dockerfile`, dockerfile);
     }
-  
+
+    execSync(`find ${builderDir}/erxes -type f -name "*.ts" -delete`);  
   }
