@@ -9,7 +9,7 @@ const REDIS_CHANNEL_REFRESH_ENABLED_SERVICES = 'refresh_enabled_services';
 const {
   NODE_ENV,
   LOAD_BALANCER_ADDRESS,
-  ENABLED_SERVICES_PATH,
+  ENABLED_SERVICES_JSON,
   REDIS_HOST,
   REDIS_PORT,
   REDIS_PASSWORD,
@@ -19,20 +19,21 @@ let enabledServicesCache: string[] = [];
 
 const isDev = NODE_ENV === 'development';
 
-if (!ENABLED_SERVICES_PATH) {
+if (!ENABLED_SERVICES_JSON) {
   throw new Error(
-    'ENABLED_SERVICES_PATH environment variable is not configured.'
+    'ENABLED_SERVICES_JSON environment variable is not configured.'
   );
 }
 
 function refreshEnabledServices() {
-  if (!ENABLED_SERVICES_PATH) {
+  if (!ENABLED_SERVICES_JSON) {
     throw new Error(
-      'ENABLED_SERVICES_PATH environment variable is not configured.'
+      'ENABLED_SERVICES_JSON environment variable is not configured.'
     );
   }
-  
-  enabledServicesCache = JSON.parse(fs.readFileSync(ENABLED_SERVICES_PATH).toString()) || [];
+
+  enabledServicesCache =
+    JSON.parse(fs.readFileSync(ENABLED_SERVICES_JSON).toString()) || [];
   enabledServicesCache.push('core');
 }
 
