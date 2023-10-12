@@ -50,5 +50,5 @@ export default async function build(folderName: string) {
       fs.writeFileSync(`${artifactDir}/Dockerfile`, dockerfile);
     }
 
-    execSync(`find ${builderDir}/erxes -type f -name "*.ts" -delete`);  
+    // execSync(`find ${builderDir}/erxes -type f -name "*.ts" -delete`);  
   }
