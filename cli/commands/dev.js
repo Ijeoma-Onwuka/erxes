@@ -23,7 +23,7 @@ module.exports.devCmd = async program => {
   }
 
   if (configs.workers) {
-    enabledServices.push('workers');
+    enabledServices.push("workers");
   }
 
   await fse.writeFile(
@@ -42,7 +42,7 @@ module.exports.devCmd = async program => {
     REDIS_PASSWORD: configs.redis.password,
     RABBITMQ_HOST: 'amqp://127.0.0.1',
     ELASTICSEARCH_URL: 'http://127.0.0.1:9200',
-    ENABLED_SERVICES_PATH: filePath('enabled-services.json'),
+    ENABLED_SERVICES_JSON: filePath('enabled-services.json'),
     ALLOWED_ORIGINS: configs.allowed_origins
   };
 
