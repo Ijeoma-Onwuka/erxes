@@ -4,8 +4,6 @@
   "license": "GNU General Public License v3.0 with Commons Clause",
   "scripts": {
     "dev": "NODE_ENV=development nodemon src/index.ts",
-    "watchTemplateForCli": "yarn ts-node src/commands/watch-template.ts",
-    "download:plugins": "yarn ts-node src/subscription/plugins/runDownloadPlugins.ts",
     "build": "yarn tsc"
   },
   "dependencies": {
